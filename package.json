@@ -18,7 +18,7 @@
     "node",
     "setup"
   ],
-  "author": "Mathieu Dutour",
+  "author": "Michael Mannseicher",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.2.4",
