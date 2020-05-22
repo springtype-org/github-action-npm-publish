@@ -23,5 +23,4 @@ jobs:
 
 ### Inputs
 
-- **github_token** _(required)_ - Required for permission to tag the repo. Usually `${{ secrets.GITHUB_TOKEN }}`.
 - **create_tag** _(optional)_ - create a tag in git repository.

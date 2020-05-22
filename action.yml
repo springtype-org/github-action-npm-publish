@@ -2,9 +2,6 @@ name: "Github Tag"
 description: "Publish to npm"
 author: "Michael Mannseicher"
 inputs:
-  github_token:
-    description: "Required for permission to tag the repo."
-    required: true
   create_tag:
     description: "Generate an tag"
     required: false

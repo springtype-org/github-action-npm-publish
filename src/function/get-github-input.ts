@@ -1,5 +1,3 @@
-import {getInput} from "@actions/core";
-
 export interface IGithubEnvironment {
     ref: string;
     sha: string;
@@ -12,8 +10,7 @@ export interface IGithubEnvironment {
  */
 export const getGithubInput = (): IGithubEnvironment => {
     const missing: Array<string> = [];
-    const {GITHUB_REF, GITHUB_SHA,GITHUB_REPOSITORY} = process.env;
-    const token = getInput("github_token");
+    const {GITHUB_REF, GITHUB_SHA, GITHUB_REPOSITORY, GITHUB_TOKEN} = process.env;
     if (!GITHUB_REF) {
         missing.push("GITHUB_REF");
     }
@@ -23,8 +20,8 @@ export const getGithubInput = (): IGithubEnvironment => {
     if (!GITHUB_REPOSITORY) {
         missing.push("GITHUB_REPOSITORY");
     }
-    if (!token) {
-        missing.push("github_token");
+    if (!GITHUB_TOKEN) {
+        missing.push("GITHUB_TOKEN");
     }
     if (missing.length > 0) {
         throw new Error(`Missing ${missing.join(' ')}`);
@@ -34,7 +31,7 @@ export const getGithubInput = (): IGithubEnvironment => {
         ref: GITHUB_REF as string,
         sha: GITHUB_SHA as string,
         repository: GITHUB_REPOSITORY as string,
-        token: token,
+        token: GITHUB_TOKEN as string,
     }
 }
 
