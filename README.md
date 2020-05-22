@@ -23,4 +23,6 @@ jobs:
 
 ### Inputs
 
-- **create_tag** _(optional)_ - create a tag in git repository.
+- **create_tag** _(optional)_ - create a tag in git repository default false.
+- **project_build_dir** _(optional)_ - the destination folder for publishing default dist.
+- **install_build_packages** _(optional)_ - install packages before publishing default false.

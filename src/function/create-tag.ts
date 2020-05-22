@@ -7,7 +7,6 @@ export const createTag = async (mergedInput: IGithubEnvironment & IActionInput, 
     const gitClient = new GitHub(mergedInput.token).git;
 
     debug(`Pushing new tag to the repo`);
-
     const tagCreateResponse = await gitClient.createTag({
         ...context.repo,
         tag: currentTag,
@@ -19,7 +18,6 @@ export const createTag = async (mergedInput: IGithubEnvironment & IActionInput, 
     const tagSha = tagCreateResponse.data.sha;
 
     debug(`Pushing new tag to the repo`);
-
     await gitClient.createRef({
         ...context.repo,
         ref: `refs/tags/${currentTag}`,

@@ -10,9 +10,15 @@ inputs:
     description: "The project build directory."
     required: false
     default: "dist"
+  install_build_packages:
+    description: "Install build packages."
+    required: false
+    default: "false"
+
 runs:
   using: "node12"
   main: "dist/index.js"
+
 branding:
   icon: "git-merge"
   color: "purple"

@@ -1,9 +1,10 @@
-import {setFailed, info} from "@actions/core";
+import {info, setFailed} from "@actions/core";
 import {getActionInput} from "./function/get-action-input";
 import {getGithubInput} from "./function/get-github-input";
 import {createTag} from "./function/create-tag";
 import {getPackageVersion} from "./function/get-package-version";
 import {exec} from "@actions/exec";
+import {installPackages} from "./function/install-packages";
 
 //IIFE ->  Immediately-invoked Function Expression
 (async () => {
@@ -12,15 +13,16 @@ import {exec} from "@actions/exec";
 
         let packageVersion = await getPackageVersion(mergedInput);
 
-        if(packageVersion.publishedVersions.find(v => packageVersion.currentPackageVersion === v)){
+        if (packageVersion.publishedVersions.find(v => packageVersion.currentPackageVersion === v)) {
             info(`Package already published ${packageVersion.currentPackageVersion}`)
             return;
         }
 
+        await installPackages(mergedInput);
         await exec(`npm publish ${mergedInput.projectBuildDir}`);
 
         if (mergedInput.createTag) {
-            await createTag(mergedInput, "version");
+            await createTag(mergedInput, packageVersion.currentPackageVersion);
         }
 
 
