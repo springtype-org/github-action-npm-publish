@@ -1,8 +1,9 @@
+import fetch from "node-fetch"
 import {join} from "path";
 import {existsSync, readFileSync} from "fs";
 import {IActionInput} from "./get-action-input";
 import {IGithubEnvironment} from "./get-github-input";
-import {exec} from "./promise-action-exec";
+import {warning} from "@actions/core";
 
 interface PackageInfo {
     name: string;
@@ -13,6 +14,13 @@ export interface PackageVersion {
     publishedVersions: Array<string>;
 }
 
+
+export const download = async (url: string, settings = {method: 'GET'}) =>{
+    const response = await fetch(url, settings);
+    return await response.json();
+}
+
+
 export const getPackageVersion = async (mergedInput: IActionInput & IGithubEnvironment):Promise<PackageVersion> => {
     const packageJsonPath = join(mergedInput.projectBuildDir, `package.json`);
 
@@ -22,7 +30,11 @@ export const getPackageVersion = async (mergedInput: IActionInput & IGithubEnvir
 
     const packageInfo = JSON.parse(readFileSync(packageJsonPath).toString('utf8')) as PackageInfo;
 
-    const publishedVersions = JSON.parse(await exec(`npm show ${packageInfo.name} versions`).then(v => v.stdout.trim().replace(/'/g,'"')));
+    const publishedVersions: Array<string> = await download(`https://registry.npmjs.org/${packageInfo.name}`)
+        .then(value => value.versions )
+        .then(versions => Object.keys(versions));
+
+    warning(`Versions ${publishedVersions.join(' ')}`);
 
     return {
         currentPackageVersion: packageInfo.version,
