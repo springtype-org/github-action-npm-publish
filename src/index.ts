@@ -5,7 +5,7 @@ import {createTag} from "./function/create-tag";
 import {getPackageVersion} from "./function/get-package-version";
 import {exec} from "@actions/exec";
 import {installPackages} from "./function/install-packages";
-
+import {writeFileSync} from "fs";
 //IIFE ->  Immediately-invoked Function Expression
 (async () => {
     try {
@@ -19,6 +19,12 @@ import {installPackages} from "./function/install-packages";
         }
 
         await installPackages(mergedInput);
+
+        //login
+        //<npm-registry>:8080/:_authToken=$AUTH_TOKEN
+        await exec(`env`);
+        writeFileSync('.npmrc', `//registry.npmjs.org:8080/:_authToken=${mergedInput.authToken}`);
+
         await exec(`npm publish ${mergedInput.projectBuildDir}`);
 
         if (mergedInput.createTag) {

@@ -24,7 +24,7 @@ export const getGithubInput = (): IGithubEnvironment => {
         missing.push("GITHUB_TOKEN");
     }
     if (missing.length > 0) {
-        throw new Error(`Missing ${missing.join(' ')}`);
+        throw new Error(`Missing env ${missing.join(' ')}`);
     }
 
     return {

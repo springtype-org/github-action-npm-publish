@@ -34,8 +34,6 @@ export const getPackageVersion = async (mergedInput: IActionInput & IGithubEnvir
         .then(value => value.versions )
         .then(versions => Object.keys(versions));
 
-    warning(`Versions ${publishedVersions.join(' ')}`);
-
     return {
         currentPackageVersion: packageInfo.version,
         publishedVersions,

@@ -10,6 +10,9 @@ inputs:
     description: "The project build directory."
     required: false
     default: "dist"
+  auth_token:
+    description: "An auth token of your npm account."
+    required: true
   install_build_packages:
     description: "Install build packages."
     required: false
