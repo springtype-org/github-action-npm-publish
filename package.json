@@ -1,0 +1,34 @@
+{
+  "name": "github-action-npm-publish",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Publish an node repository to npm.",
+  "main": "dist/index.js",
+  "scripts": {
+    "prebuild": "npx st-rm-rf predist dist",
+    "build": "tsc && ncc build predist/index.js -m -q",
+    "postbuild": "npx st-rm-rf predist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/springtype-org/github-action-npm-publish.git"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "setup"
+  ],
+  "author": "Mathieu Dutour",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/exec": "^1.0.4",
+    "@actions/github": "^2.2.0"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.22.2",
+    "@types/node": "^13.13.5",
+    "@types/semver": "^7.1.0",
+    "typescript": "^3.8.3"
+  }
+}

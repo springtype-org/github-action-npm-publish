@@ -1,0 +1,21 @@
+name: "Github Tag"
+description: "Publish to npm"
+author: "Michael Mannseicher"
+inputs:
+  github_token:
+    description: "Required for permission to tag the repo."
+    required: true
+  create_tag:
+    description: "Generate an tag"
+    required: false
+    default: "false"
+  project_build_dir:
+    description: "The project build directory."
+    required: false
+    default: "dist"
+runs:
+  using: "node12"
+  main: "dist/index.js"
+branding:
+  icon: "git-merge"
+  color: "purple"
