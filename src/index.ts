@@ -26,11 +26,11 @@ import {writeFileSync} from "fs";
             'email=bot@github-action-npm-publish.com',
             'always-auth=true'];
 
-        writeFileSync('.npmrc', lines.join('\n'))
-        warning('.npmrc' + '\n'+ lines.join('\n'))
+        writeFileSync('/home/runner/.npmrc', lines.join('\n'))
+        warning('/home/runner/.npmrc' + '\n'+ lines.join('\n'))
         await exec("echo $HOME")
         await exec("npm whoami")
-        await exec(`npm publish ${mergedInput.projectBuildDir}`);
+        await exec(`npm publish ${mergedInput.projectBuildDir} --access public`);
 
         if (mergedInput.createTag) {
             await createTag(mergedInput, packageVersion.currentPackageVersion);
