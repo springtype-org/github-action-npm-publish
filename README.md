@@ -14,7 +14,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                node-version: 10.x
       - name: Bump version and push tag
         uses: springtype-org/github-tag-action@master
         with:
@@ -24,7 +27,7 @@ jobs:
 
 ### Inputs
 
-- **auth_token** _(required)_ - an npm auth-token to your account (required).
+- **auth_token** _(required)_ - an generated npm auth-token to your account (required).
 - **create_tag** _(optional)_ - create a tag in git repository default false.
 - **project_build_dir** _(optional)_ - the destination folder for publishing default dist.
 - **install_build_packages** _(optional)_ - install packages before publishing default false.
