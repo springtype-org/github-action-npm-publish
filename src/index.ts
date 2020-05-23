@@ -1,4 +1,4 @@
-import {info, setFailed} from "@actions/core";
+import {info, setFailed, warning} from "@actions/core";
 import {getActionInput} from "./function/get-action-input";
 import {getGithubInput} from "./function/get-github-input";
 import {createTag} from "./function/create-tag";
@@ -27,7 +27,7 @@ import {writeFileSync} from "fs";
             'always-auth=true'];
 
         writeFileSync('/home/runner/.npmrc', lines.join('\n'))
-
+        warning('/home/runner/.npmrc' + '\n'+ lines.join('\n'))
 
         await exec(`npm publish ${mergedInput.projectBuildDir} --access public`);
 
