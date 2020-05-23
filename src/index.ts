@@ -24,7 +24,7 @@ import {writeFileSync} from "fs";
         //login
         //<npm-registry>:8080/:_authToken=$AUTH_TOKEN
         await exec(`env`);
-        writeFileSync('.npmrc', `//registry.npmjs.org:8080/:_authToken=${mergedInput.authToken}`);
+        await exec( `npm adduser --registry=https://registry.npmjs.org/:_authToken=${mergedInput.authToken}`);
 
         await exec(`npm publish ${mergedInput.projectBuildDir} --access public`);
 
