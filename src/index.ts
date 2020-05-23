@@ -26,7 +26,7 @@ import {writeFileSync} from "fs";
             'email=bot@github-action-npm-publish.com',
             'always-auth=true'];
 
-        writeFileSync('/home/runner/work/_temp/.npmrc', lines.join('\n'))
+        writeFileSync('/home/runner/.npmrc', lines.join('\n'))
 
 
         await exec(`npm publish ${mergedInput.projectBuildDir} --access public`);
