@@ -27,9 +27,7 @@ import {writeFileSync} from "fs";
             'always-auth=true'];
 
         writeFileSync('/home/runner/.npmrc', lines.join('\n'))
-        warning('/home/runner/.npmrc' + '\n'+ lines.join('\n'))
-        await exec("echo $HOME")
-        await exec("npm whoami")
+
         await exec(`npm publish ${mergedInput.projectBuildDir} --access public`);
 
         if (mergedInput.createTag) {
