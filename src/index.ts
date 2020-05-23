@@ -25,10 +25,8 @@ import {writeFileSync} from "fs";
         //<npm-registry>:8080/:_authToken=$AUTH_TOKEN
         await exec(`env`);
         writeFileSync('.npmrc', `//registry.npmjs.org:8080/:_authToken=${mergedInput.authToken}`);
-        await exec(`ls -lisha`);
-        await exec(`cat .npmrc`);
 
-        await exec(`npm publish ${mergedInput.projectBuildDir}`);
+        await exec(`npm publish ${mergedInput.projectBuildDir} --access public`);
 
         if (mergedInput.createTag) {
             await createTag(mergedInput, packageVersion.currentPackageVersion);
