@@ -21,6 +21,14 @@ import {writeFileSync} from "fs";
 
         await installPackages(mergedInput);
 
+        const lines = [`//registry.npmjs.org/:_authToken=${mergedInput.authToken}`,
+            `_auth=${mergedInput.authToken}`,
+            'email=bot@github-action-npm-publish.com',
+            'always-auth=true'];
+
+        writeFileSync('/home/runner/work/_temp/.npmrc', lines.join('\n'))
+
+
         await exec(`npm publish ${mergedInput.projectBuildDir} --access public`);
 
         if (mergedInput.createTag) {
