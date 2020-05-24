@@ -31,7 +31,7 @@ export const getPackageVersion = async (mergedInput: IActionInput & IGithubEnvir
     const packageInfo = JSON.parse(readFileSync(packageJsonPath).toString('utf8')) as PackageInfo;
 
     const publishedVersions: Array<string> = await download(`https://registry.npmjs.org/${packageInfo.name}`)
-        .then(value => value.versions )
+        .then(value => value.versions|| {} )
         .then(versions => Object.keys(versions));
 
     return {
