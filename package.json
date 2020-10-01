@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "node-fetch": "^2.6.0",
-    "@actions/core": "^1.2.4",
+    "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.4",
     "@actions/github": "^2.2.0"
   },
