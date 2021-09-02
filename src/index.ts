@@ -1,4 +1,4 @@
-import {info, setFailed, warning} from "@actions/core";
+import {info, setFailed, setOutput} from "@actions/core";
 import {getActionInput} from "./function/get-action-input";
 import {getGithubInput} from "./function/get-github-input";
 import {createTag} from "./function/create-tag";
@@ -14,8 +14,11 @@ import {writeFileSync} from "fs";
 
         let packageVersion = await getPackageVersion(mergedInput);
 
+        setOutput('currentVersion',packageVersion.currentPackageVersion)
+
         if (packageVersion.publishedVersions.find(v => packageVersion.currentPackageVersion === v)) {
             info(`Package already published ${packageVersion.currentPackageVersion}`)
+            setOutput('published', false);
             return;
         }
 
@@ -29,6 +32,7 @@ import {writeFileSync} from "fs";
         writeFileSync('/home/runner/.npmrc', lines.join('\n'))
 
         await exec(`npm publish ${mergedInput.projectBuildDir} --access public`);
+        setOutput('published', true);
 
         if (mergedInput.createTag) {
             await createTag(mergedInput, packageVersion.currentPackageVersion);

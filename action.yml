@@ -17,6 +17,11 @@ inputs:
     description: "Install build packages."
     required: false
     default: "false"
+outputs:
+  published:
+    description: "Published new version"
+  currentVersion:
+    description: "current repository version"
 
 runs:
   using: "node12"
