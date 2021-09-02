@@ -18,6 +18,6 @@ export const installPackages = async (mergedInput: IGithubEnvironment & IActionI
             return;
         }
 
-        await exec("npm install --production");
+        await exec(`npm --prefix ${mergedInput.projectBuildDir} install --production`);
     }
 }
