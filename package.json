@@ -5,7 +5,7 @@
   "description": "Publish an node repository to npm.",
   "main": "dist/index.cjs.js",
   "engines": {
-    "node": ">=14.0"
+    "node": ">=16.0"
   },
   "scripts": {
     "prebuild": "yarn node ./prebuild.mjs",

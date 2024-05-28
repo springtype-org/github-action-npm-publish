@@ -28,7 +28,7 @@ outputs:
     description: "current repository version"
 
 runs:
-  using: "node14"
+  using: "node16"
   main: "dist/index.cjs.js"
 
 branding:
