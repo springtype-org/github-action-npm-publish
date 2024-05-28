@@ -17,8 +17,14 @@ import { writeFileSync } from 'fs';
     const mergedInput = { ...getActionInput(), ...getGithubInput() };
 
     let packageInfo = await getPackageInfo(mergedInput);
+    info(
+      `package.json name:${packageInfo.name} version:${packageInfo.version}`
+    );
     let packageVersion = await getPackageVersion(packageInfo);
     let packageScope = await getPackageScope(packageInfo);
+
+    info(`Package scopre:${packageScope}`);
+    info(`current package version:${packageVersion.currentPackageVersion}`);
 
     setOutput('currentVersion', packageVersion.currentPackageVersion);
 
