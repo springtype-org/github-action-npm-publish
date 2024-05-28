@@ -56,12 +56,14 @@ import path from 'path';
     }
 
     writeFileSync('/home/runner/.npmrc', lines.join('\n'));
-
-    const publishPath = path.join(process.cwd(), mergedInput.projectBuildDir);
+    const oldPath = process.cwd();
+    const publishPath = path.join(oldPath, mergedInput.projectBuildDir);
     process.chdir(publishPath);
 
     await exec(`npm publish --access public`);
     setOutput('published', true);
+
+    process.chdir(oldPath);
 
     if (mergedInput.createTag) {
       await createTag(mergedInput, packageVersion.currentPackageVersion);
