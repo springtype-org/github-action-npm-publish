@@ -1,13 +1,15 @@
 {
   "name": "github-action-npm-publish",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Publish an node repository to npm.",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs.js",
+  "engines": {
+    "node": ">=14.0"
+  },
   "scripts": {
-    "prebuild": "npx st-rm-rf predist dist",
-    "build": "tsc && ncc build predist/index.js -m -q",
-    "postbuild": "npx st-rm-rf predist"
+    "prebuild": "yarn node ./prebuild.mjs",
+    "build": "yarn node --enable-source-maps ./build.mjs"
   },
   "repository": {
     "type": "git",
@@ -21,15 +23,15 @@
   "author": "Michael Mannseicher",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^2.6.0",
-    "@actions/core": "^1.2.4",
-    "@actions/exec": "^1.0.4",
-    "@actions/github": "^2.2.0"
+    "@actions/core": "^1.10.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^6.0.0",
+    "@jsheaven/easybuild": "^1.2.9",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.22.2",
-    "@types/node": "^13.13.5",
-    "@types/semver": "^7.1.0",
-    "typescript": "^3.8.3"
+    "@types/node": "^20.12.12",
+    "@types/semver": "^7.5.8",
+    "typescript": "^5.4.5"
   }
 }

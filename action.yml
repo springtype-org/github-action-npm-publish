@@ -17,6 +17,10 @@ inputs:
     description: "Install build packages."
     required: false
     default: "false"
+  registry:
+    description: "npm registry."
+    required: false
+    default: "https://registry.npmjs.org/"
 outputs:
   published:
     description: "Published new version"
