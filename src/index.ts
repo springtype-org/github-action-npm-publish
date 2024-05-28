@@ -57,7 +57,7 @@ import { writeFileSync } from 'fs';
     writeFileSync('/home/runner/.npmrc', lines.join('\n'));
 
     await exec(
-      `npm publish --prefix ${mergedInput.projectBuildDir} --access public`
+      `cd ${mergedInput.projectBuildDir} && npm publish --access public`
     );
     setOutput('published', true);
 
