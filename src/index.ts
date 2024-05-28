@@ -38,7 +38,6 @@ import { writeFileSync } from 'fs';
       `//${mergedInput.registry.replace(/^https?:\/\//, '')}:_authToken=${
         mergedInput.authToken
       }`,
-      `_auth=${mergedInput.authToken}`,
       'email=bot@github-action-npm-publish.com',
       'always-auth=true',
       `registry=${mergedInput.registry}`,
