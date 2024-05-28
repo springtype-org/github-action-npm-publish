@@ -8,8 +8,8 @@
     "node": ">=16.0"
   },
   "scripts": {
-    "prebuild": "yarn node ./prebuild.mjs",
-    "build": "yarn node --enable-source-maps ./build.mjs"
+    "prebuild": "node ./prebuild.mjs",
+    "build": "ncc build src/index.ts -m -q -o dist"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "@actions/core": "^1.10.1",
     "@actions/exec": "^1.1.1",
     "@actions/github": "^6.0.0",
-    "@jsheaven/easybuild": "^1.2.9",
+    "@vercel/ncc": "^0.38.1",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
