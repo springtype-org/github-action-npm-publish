@@ -10,6 +10,7 @@ import {
 import { exec } from '@actions/exec';
 import { installPackages } from './function/install-packages';
 import { writeFileSync } from 'fs';
+import path from 'path';
 
 //IIFE ->  Immediately-invoked Function Expression
 (async () => {
@@ -56,9 +57,10 @@ import { writeFileSync } from 'fs';
 
     writeFileSync('/home/runner/.npmrc', lines.join('\n'));
 
-    await exec(
-      `cd ${mergedInput.projectBuildDir} && npm publish --access public`
-    );
+    const publishPath = path.join(process.cwd(), mergedInput.projectBuildDir);
+    process.chdir(publishPath);
+
+    await exec(`npm publish --access public`);
     setOutput('published', true);
 
     if (mergedInput.createTag) {
