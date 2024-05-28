@@ -56,7 +56,9 @@ import { writeFileSync } from 'fs';
 
     writeFileSync('/home/runner/.npmrc', lines.join('\n'));
 
-    await exec(`npm publish --access public ${mergedInput.projectBuildDir}`);
+    await exec(
+      `npm publish --prefix ${mergedInput.projectBuildDir} --access public`
+    );
     setOutput('published', true);
 
     if (mergedInput.createTag) {
