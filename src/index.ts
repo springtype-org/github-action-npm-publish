@@ -23,8 +23,8 @@ import { writeFileSync } from 'fs';
     let packageVersion = await getPackageVersion(packageInfo);
     let packageScope = await getPackageScope(packageInfo);
 
-    info(`Package scopre:${packageScope}`);
-    info(`current package version:${packageVersion.currentPackageVersion}`);
+    info(`package scope:${packageScope}`);
+    info(`published versions:${packageVersion.publishedVersions.join(', ')}`);
 
     setOutput('currentVersion', packageVersion.currentPackageVersion);
 
@@ -56,7 +56,7 @@ import { writeFileSync } from 'fs';
 
     writeFileSync('/home/runner/.npmrc', lines.join('\n'));
 
-    await exec(`npm publish ${mergedInput.projectBuildDir} --access public`);
+    await exec(`npm publish --access public ${mergedInput.projectBuildDir}`);
     setOutput('published', true);
 
     if (mergedInput.createTag) {
