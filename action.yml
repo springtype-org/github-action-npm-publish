@@ -28,8 +28,8 @@ outputs:
     description: "current repository version"
 
 runs:
-  using: "node12"
-  main: "dist/index.js"
+  using: "node14"
+  main: "dist/index.cjs.js"
 
 branding:
   icon: "git-merge"
